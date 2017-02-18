@@ -7,7 +7,7 @@ Standard URLs are hard to remember and take too long to type; URL-shorteners giv
 This aims to perfect the art of *"It should be the first result if you Google 'x y z' "*.
 
 ## Usage
-Example Input: https://www.ted.com/talks/david_eagleman_can_we_create_new_senses_for_human
+Example Input: "https://www.ted.com/talks/david_eagleman_can_we_create_new_senses_for_human"
 
 Example Output: "TED VEST"
 
