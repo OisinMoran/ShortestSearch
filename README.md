@@ -2,7 +2,7 @@
 Program to find the shortest phrase to Google to ensure a given URL is the first result
 
 ## Motivation
-Standard URLs are hard to remember and take too long to type; URL-shorteners give links that are quicker to type but even harder to remember; and when instructing someone to Google something we often give them too much information.
+Standard URLs are hard to remember and take too long to type, URL-shorteners give links that are quicker to type but even harder to remember, and when instructing someone to Google something we often give them too much information.
 
 This aims to perfect the art of *"It should be the first result if you Google 'x y z' "*.
 
