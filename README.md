@@ -1,3 +1,5 @@
+> **WARNING**: Automated querying is, quite reasonably, prohibited by the terms of service of Google and any other search engine. Programmatic searches must therefore be done through Google's Custom Search JSON/Atom API - https://developers.google.com/custom-search/json-api/v1/overview.
+
 # ShortestSearch
 Program to find the shortest phrase to Google to ensure a given URL is the first result
 
@@ -14,5 +16,5 @@ Example Output: "TED VEST"
 ---
 
 **Note:** Google's search results are location dependent, therefore:
-* for a given URL, the shortest phrase will not necessarily be the same for everyone
-* a given phrase may not return the intended URL as the first search result for everyone
+* For a given URL, the shortest phrase will not necessarily be the same for everyone
+* A given phrase may not return the intended URL as the first search result for everyone
