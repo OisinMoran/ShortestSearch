@@ -1,6 +1,5 @@
 # NOTE: This does not search or use Google,
 #       it only generates search suggestions
-
 from bs4 import BeautifulSoup
 from urllib.request import Request, urlopen
 from collections import Counter
@@ -8,8 +7,11 @@ import itertools
 import re
 import time
 
+MIN_WORDS_IN_PHRASE = 2
+MAX_WORDS_IN_PHRASE = 2
+
 # Function to split a string into words
-def getWords(text):
+def get_words(text):
     return re.compile('\w+').findall(text)
 
 # Function to check if a string can be a number
@@ -29,7 +31,7 @@ content = [x.strip() for x in content]
 # Create a dict of of the form - word:rank_in_list
 mydict = {word.upper():(index+1) for index,word in enumerate(content)}
 
-MIN_FREQ = len(mydict)
+min_freq = len(mydict)
 
 ## Read data from URL
 given_url = "https://www.ted.com/talks/david_eagleman_can_we_create_new_senses_for_humans"
@@ -55,7 +57,7 @@ text = '\n'.join(chunk.upper() for chunk in chunks if chunk)
 #print(text)
 
 ## Split into words
-words = getWords(text)
+words = get_words(text)
 # Get rid of numbers
 words = [x for x in words if not is_number(x)]
 
@@ -65,10 +67,10 @@ for word in word_scores:
     if word in mydict:
         word_scores[word] = word_scores[word]*(mydict[word])
     else:
-        word_scores[word] = word_scores[word]*MIN_FREQ
+        word_scores[word] = word_scores[word]*min_freq
 
 # Sort words based on score
-sorted_words = sorted(word_scores, key=word_scores.get, reverse = True)
+sorted_words = sorted(word_scores, key=word_scores.get, reverse=True)
 # print(sorted_words)
 print("{} words found on page.".format(len(sorted_words)))
 
@@ -76,8 +78,6 @@ print("{} words found on page.".format(len(sorted_words)))
 hits = ['TED VEST', 'TED EAGLEMAN', 'TED SENSES']
 min_len = float('inf')
 search_no = 1
-MIN_WORDS_IN_PHRASE = 2
-MAX_WORDS_IN_PHRASE = 2
 
 print("Search Suggestions:")
 ## Generate search phrases
