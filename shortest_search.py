@@ -1,5 +1,5 @@
 # NOTE: This does not search or use Google,
-#       it merely generates search suggestions
+#       it only generates search suggestions
 
 from bs4 import BeautifulSoup
 from urllib.request import Request, urlopen
