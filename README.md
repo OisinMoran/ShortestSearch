@@ -1,4 +1,4 @@
-> **WARNING**: Automated querying is prohibited by the terms of service of Google and other search engines. Programmatic searches must therefore be done through Google's Custom Search JSON/Atom API - https://developers.google.com/custom-search/json-api/v1/overview.
+> **WARNING**: Automated querying is prohibited by the terms of service of Google and other search engines. Programmatic searches must be done through Google's Custom Search JSON/Atom API - https://developers.google.com/custom-search/json-api/v1/overview.
 
 # ShortestSearch
 Program to find the shortest phrase to Google to ensure a given URL is the first result
