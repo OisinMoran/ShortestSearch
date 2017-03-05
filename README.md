@@ -1,3 +1,5 @@
+> To run this shortest_search.py you need an API key for Google's Custom Search JSON/Atom API which you can get at https://developers.google.com/custom-search/json-api/v1/overview. If you don't want to do that you can just play around in the sandbox version. It doesn't search but does generate search suggestions.
+
 # ShortestSearch
 Program to find the shortest phrase to Google to ensure a given URL is the first result
 
@@ -12,8 +14,6 @@ Example Input: "https://www.ted.com/talks/david_eagleman_can_we_create_new_sense
 Example Output: "TED VEST"
 
 ---
-
-> To run this program you need an API key for Google's Custom Search JSON/Atom API which you can get at https://developers.google.com/custom-search/json-api/v1/overview.
 
 **Note:** Google's search results are location dependent, therefore:
 * For a given URL, the shortest phrase will not necessarily be the same for everyone
