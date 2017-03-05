@@ -88,11 +88,10 @@ sorted_words = sorted(word_scores, key=word_scores.get, reverse=True)
 # print(sorted_words)
 print("{} words found on page.".format(len(sorted_words)))
 
+## Generate search phrases
+print("Search Hits:")
 min_len = float('inf')
 search_no = 1
-
-print("Search Suggestions:")
-## Generate search phrases
 for L in range(MIN_WORDS_IN_PHRASE, MAX_WORDS_IN_PHRASE+1):
     for subset in itertools.combinations(sorted_words, L):
         search_phrase = "{} {}".format(subset[0], subset[1])
