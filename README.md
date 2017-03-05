@@ -21,4 +21,5 @@ Example Output: "TED VEST"
 
 ## To Do:
 - [ ] Give more weight to words that appear in the title of a page
+- [ ] Give word combinations a score and sort based on that
 - [ ] Give less weight to words that appear in links on the page
