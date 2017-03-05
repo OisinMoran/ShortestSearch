@@ -18,3 +18,7 @@ Example Output: "TED VEST"
 **Note:** Google's search results are location dependent, therefore:
 * For a given URL, the shortest phrase will not necessarily be the same for everyone
 * A given phrase may not return the intended URL as the first search result for everyone
+
+## To Do:
+[ ] Give more weight to words that appear in the title of a page
+[ ] Give less weight to words that appear in links on the page
