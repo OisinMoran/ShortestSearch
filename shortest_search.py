@@ -97,9 +97,8 @@ for L in range(MIN_WORDS_IN_PHRASE, MAX_WORDS_IN_PHRASE+1):
     for subset in itertools.combinations(sorted_words, L):
         search_phrase = "{} {}".format(subset[0], subset[1])
         if len(search_phrase) <= min_len:
-            results = google_search(search_phrase, my_cse_id, num=1)
-            for result in results:
-                first_url = result.get('link')
+            result = google_search(search_phrase, my_cse_id, num=1)    
+            first_url = result[0]['link']
             search_no += 1
             if first_url == given_url:
                 print("{}: {}".format(search_no, search_phrase))
