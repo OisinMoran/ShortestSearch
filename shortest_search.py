@@ -1,7 +1,7 @@
 from googleapiclient.discovery import build
 from urllib.request import Request, urlopen
 from collections import Counter
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Comment, Doctype
 import configparser
 import itertools
 import re
@@ -17,6 +17,8 @@ dev_key = config['CSE']['dev_key']
 
 MIN_WORDS_IN_PHRASE = 2
 MAX_WORDS_IN_PHRASE = 2
+TITLE_FACTOR = 10
+LINK_FACTOR = 0.1
 
 # Function to split a string into words
 def get_words(text):
@@ -49,6 +51,7 @@ min_freq = len(mydict)
 
 ## Read data from URL
 given_url = "https://www.ted.com/talks/david_eagleman_can_we_create_new_senses_for_humans"
+#given_url = "http://www.paulgraham.com/writing44.html"
 req = Request(given_url, headers={"User-Agent": "Mozilla/5.0"})
 html = urlopen(req).read()
 soup = BeautifulSoup(html)
@@ -57,48 +60,67 @@ soup = BeautifulSoup(html)
 # kill all script and style elements
 for script in soup(["script", "style"]):
     script.extract()
-
-# get text
-text = soup.get_text()
-#print(text)
-
+# Delete comments and doctype
+for element in soup(text=lambda text: isinstance(text, Comment) or isinstance(text, Doctype)):
+    element.extract()
+# Get text
+text = " ".join(item.strip() for item in soup.find_all(text=True))
 # break into lines and remove leading and trailing space on each
 lines = (line.strip() for line in text.splitlines())
 # break multi-headlines into a line each
 chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
 # drop blank lines
 text = '\n'.join(chunk.upper() for chunk in chunks if chunk)
-#print(text)
-
 ## Split into words
 words = get_words(text)
 # Get rid of numbers
 words = [x for x in words if not is_number(x)]
 
+
+# Get words in title (these will score higher)
+title = [word.upper() for word in get_words(soup.title.string)]
+# Get words in links (these will score lower)
+link_text = []
+for link in soup.findAll('a'):
+    if link.string:
+        link_text += [word.upper() for word in get_words(link.string)]
+
 # TF-IDF
 word_scores = Counter(words)
 for word in word_scores:
+    if word in title:
+        word_scores[word] = word_scores[word]*TITLE_FACTOR
+    elif word in link_text:
+        word_scores[word] = word_scores[word]*LINK_FACTOR
+        
     if word in mydict:
         word_scores[word] = word_scores[word]*(mydict[word])
     else:
         word_scores[word] = word_scores[word]*min_freq
 
-# Sort words based on score
-sorted_words = sorted(word_scores, key=word_scores.get, reverse=True)
-# print(sorted_words)
-print("{} words found on page.".format(len(sorted_words)))
+print("{} words found on page.".format(len(word_scores)))
 
 ## Generate search phrases
+search_phrases = {}
+for L in range(MIN_WORDS_IN_PHRASE, MAX_WORDS_IN_PHRASE+1):
+    # Note searching 'x,y' is not same as 'y,x' so combinations may be suboptimal, but faster, here
+    for subset in itertools.combinations(word_scores, L): 
+        phrase = " ".join(subset)
+        score = sum([word_scores[word] for word in subset])
+        search_phrases[phrase] = score
+        
+# Sort search phrases based on their scores
+sorted_phrases = sorted(search_phrases, key=search_phrases.get, reverse=True)
+
+## Perform Search
 print("Search Hits:")
 min_len = float('inf')
 search_no = 1
-for L in range(MIN_WORDS_IN_PHRASE, MAX_WORDS_IN_PHRASE+1):
-    for subset in itertools.combinations(sorted_words, L):
-        search_phrase = "{} {}".format(subset[0], subset[1])
-        if len(search_phrase) <= min_len:
-            result = google_search(search_phrase, my_cse_id, num=1)    
-            first_url = result[0]['link']
-            search_no += 1
-            if first_url == given_url:
-                print("{}: {}".format(search_no, search_phrase))
-                min_len = len(search_phrase)
+for search_phrase in sorted_phrases:
+    if len(search_phrase) <= min_len:
+        result = google_search(search_phrase, my_cse_id, num=1)    
+        first_url = result[0]['link']
+        search_no += 1
+        if first_url == given_url:
+            print("{}: {}".format(search_no, search_phrase))
+            min_len = len(search_phrase)

@@ -20,6 +20,6 @@ Output: "[TED VEST](https://www.google.com/search?q=ted+vest)"
 * A given phrase may not return the intended URL as the first search result for everyone
 
 ## To Do:
-- [ ] Give more weight to words that appear in the title of a page
-- [ ] Give word combinations a score and sort based on that
-- [ ] Give less weight to words that appear in links on the page
+- [x] Give more weight to words that appear in the title of a page
+- [x] Give word combinations a score and sort based on that
+- [x] Give less weight to words that appear in links on the page
