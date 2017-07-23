@@ -51,10 +51,10 @@ min_freq = len(mydict)
 
 ## Read data from URL
 given_url = "https://www.ted.com/talks/david_eagleman_can_we_create_new_senses_for_humans"
-#given_url = "http://www.paulgraham.com/writing44.html"
+given_url = "http://www.paulgraham.com/writing44.html"
 req = Request(given_url, headers={"User-Agent": "Mozilla/5.0"})
 html = urlopen(req).read()
-soup = BeautifulSoup(html)
+soup = BeautifulSoup(html, "html.parser")
 
 ## Extract words from site data
 # kill all script and style elements
@@ -115,7 +115,7 @@ sorted_phrases = sorted(search_phrases, key=search_phrases.get, reverse=True)
 ## Perform Search
 print("Search Hits:")
 min_len = float('inf')
-search_no = 1
+search_no = 0
 for search_phrase in sorted_phrases:
     if len(search_phrase) <= min_len:
         result = google_search(search_phrase, my_cse_id, num=1)    
