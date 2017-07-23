@@ -16,10 +16,5 @@ Output: "[TED VEST](https://www.google.com/search?q=ted+vest)"
 ---
 
 **Note:** Google's search results are location dependent, therefore:
-* For a given URL, the shortest phrase will not necessarily be the same for everyone
-* A given phrase may not return the intended URL as the first search result for everyone
-
-## To Do:
-- [x] Give more weight to words that appear in the title of a page
-- [x] Give word combinations a score and sort based on that
-- [x] Give less weight to words that appear in links on the page
+* For a given URL, the shortest phrase will not necessarily be the same for everyone.
+* A given phrase may not return the intended URL as the first search result for everyone.
