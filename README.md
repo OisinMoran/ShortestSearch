@@ -24,4 +24,4 @@ Output: "[WRITING BRIEFLY](https://www.google.com/search?q=writing+briefly)"
 * For a given URL, the shortest phrase will not necessarily be the same for everyone.
 * A given phrase may not return the intended URL as the first search result for everyone.
 
-*Some URLs may have no phrase
+*Some URLs may have no such phrase
