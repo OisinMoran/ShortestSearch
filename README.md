@@ -8,10 +8,15 @@ Standard URLs are hard to remember and take too long to type; URL-shorteners giv
 
 This aims to perfect the art of *"It should be the first result if you Google 'x y z' "*.
 
-## Example
+## Examples
 Input: "<https://www.ted.com/talks/david_eagleman_can_we_create_new_senses_for_humans>"
 
 Output: "[TED VEST](https://www.google.com/search?q=ted+vest)"
+<br><br>
+
+Input: "<http://www.paulgraham.com/writing44.html>"
+
+Output: "[WRITING BRIEFLY](https://www.google.com/search?q=writing+briefly)"
 
 ---
 
